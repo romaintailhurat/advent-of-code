@@ -16,6 +16,14 @@ function computeSurface(dimensions) {
   return surface + slack;
 }
 
+function computeRibbon(dimensions) {
+  let { l, w, h } = getDimensions(dimensions);
+  let { x, y } =  getSmallestDims(l, w, h);
+  let ribbon =  2*x + 2*y;
+  let bow = l * w * h;
+  return ribbon + bow;
+}
+
 function getDimensions(dimensions) {
   let dimArray = dimensions.split('x');
   let dims = dimArray.map(dim => parseInt(dim));
@@ -27,6 +35,11 @@ function getSmallestDims(l, w, h) {
   return {x: ordered[0], y: ordered[1]};
 }
 
-var res = input.map(x => computeSurface(x)).reduce((x, y) => x + y);
+// ==> Solution to first part
+//var res = input.map(x => computeSurface(x)).reduce((x, y) => x + y);
+//console.log('résultat final', res);
+
+// ==> Solution to second part
+var res = input.map(x => computeRibbon(x)).reduce((x, y) => x + y);
 console.log('résultat final', res);
 
